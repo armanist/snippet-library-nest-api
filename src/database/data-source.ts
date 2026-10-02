@@ -6,5 +6,6 @@ export default new DataSource({
     type: 'better-sqlite3',
     database: process.env.DATABASE_PATH ?? 'snippets.sqlite',
     entities: [SnippetEntity],
-    migrations: [__dirname + '/migrations/**/*{.js,.ts}']
+    migrations: [__dirname + '/migrations/**/*{.js,.ts}'],
+    synchronize: false,
 });

@@ -1,4 +1,4 @@
-# Snippet Library API
+# Snippet Library Nest API
 
 A learning project built with NestJS and TypeScript. It provides a REST API for storing code snippets in a local SQLite database.
 
@@ -98,7 +98,7 @@ A successful deletion returns:
 The Bruno-importable collection is located at:
 
 ```text
-bruno/snippet-library-api.postman_collection.json
+bruno/snippet-library-nest-api.postman_collection.json
 ```
 
 In Bruno, choose **Import** and select that file. The collection includes requests for listing, reading, creating, and deleting snippets.
@@ -116,7 +116,7 @@ src/
     snippets.controller.ts
     snippets.service.ts
 bruno/
-  snippet-library-api.postman_collection.json
+  snippet-library-nest-api.postman_collection.json
 snippets.sqlite
 ```
 
@@ -138,11 +138,3 @@ npm run format
 # Lint source files
 npm run lint
 ```
-
-## Current Limitations
-
-- Snippets are currently created and deleted through the API only.
-- Editing snippets with PUT or PATCH is not implemented yet.
-- The SQLite database is intended for local development.
-- Database synchronization is enabled for learning and development. It should be replaced with migrations before production use.
-- Automated tests have not been added yet.
