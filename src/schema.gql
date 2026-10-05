@@ -16,6 +16,7 @@ scalar DateTime
 
 type Mutation {
   createSnippet(input: CreateSnippetInput!): Snippet!
+  deleteSnippet(id: ID!): ID!
   updateSnippet(id: ID!, input: UpdateSnippetInput!): Snippet!
 }
 

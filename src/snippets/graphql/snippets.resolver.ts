@@ -37,4 +37,10 @@ export class SnippetResolver {
     ): Promise<SnippetEntity> {
         return this.snippetService.update(id, input);
     }
+
+    @Mutation(() => ID, {name: 'deleteSnippet'})
+    async delete(@Args('id', {type: () => ID}) id: string): Promise<string> {
+        await this.snippetService.remove(id);
+        return id;
+    }
 }
