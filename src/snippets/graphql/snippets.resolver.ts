@@ -5,6 +5,7 @@ import { SnippetPageGraphqlType } from "./snippet-page.graphql-type";
 import { CreateSnippetGraphqlInput } from "./create-snippet.graphql-input";
 import type { SnippetEntity } from "../snippet.entity";
 import type { FindSnippetsResult } from "../snippet";
+import { UpdateSnippetGraphqlInput } from "./update-snippet.graphql-input";
 
 @Resolver(() => SnippetGraphqlType)
 export class SnippetResolver {
@@ -27,5 +28,13 @@ export class SnippetResolver {
     @Mutation(() => SnippetGraphqlType, { name: 'createSnippet' })
     create(@Args('input') input: CreateSnippetGraphqlInput): Promise<SnippetEntity> {
         return this.snippetService.create(input);
+    }
+
+    @Mutation(() => SnippetGraphqlType, {name: 'updateSnippet'})
+    update(
+        @Args('id', {type: () => ID}) id: string,
+        @Args('input') input: UpdateSnippetGraphqlInput,
+    ): Promise<SnippetEntity> {
+        return this.snippetService.update(id, input);
     }
 }

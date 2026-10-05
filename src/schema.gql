@@ -16,6 +16,7 @@ scalar DateTime
 
 type Mutation {
   createSnippet(input: CreateSnippetInput!): Snippet!
+  updateSnippet(id: ID!, input: UpdateSnippetInput!): Snippet!
 }
 
 type PaginationMetadata {
@@ -50,4 +51,11 @@ enum SnippetLanguage {
 type SnippetPage {
   pagination: PaginationMetadata!
   snippets: [Snippet!]!
+}
+
+input UpdateSnippetInput {
+  code: String
+  language: SnippetLanguage
+  tags: [String!]
+  title: String
 }
