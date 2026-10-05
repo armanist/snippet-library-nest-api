@@ -5,16 +5,16 @@ import type { SnippetEntity } from "../snippet.entity";
 
 @Resolver(() => SnippetGraphqlType)
 export class SnippetResolver {
-    constructor(private readonly snippetService: SnippetsService) {}
+    constructor(private readonly snippetService: SnippetsService) { }
 
-    @Query(() => [SnippetGraphqlType], {name: 'snippets'})
-    async findAll(): Promise<SnippetEntity[]> {
-        const result = await this.snippetService.findAll({});
+    @Query(() => [SnippetGraphqlType], { name: 'snippets' })
+    async findAll(@Args('search', { type: () => String, nullable: true }) search?: string): Promise<SnippetEntity[]> {
+        const result = await this.snippetService.findAll({ search });
         return result.snippets;
     }
 
-    @Query(() => SnippetGraphqlType, {name: 'snippet'})
-    findOne(@Args('id', {type: () => ID}) id: string): Promise<SnippetEntity> {
+    @Query(() => SnippetGraphqlType, { name: 'snippet' })
+    findOne(@Args('id', { type: () => ID }) id: string): Promise<SnippetEntity> {
         return this.snippetService.findOne(id);
     }
 }
