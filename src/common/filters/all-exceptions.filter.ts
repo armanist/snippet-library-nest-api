@@ -8,11 +8,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
 
-    catch(exception: unknown, host: ArgumentsHost): unknown {
-        if (host.getType<string>() === 'graphql') {
-            return exception;
-        }
-
+    catch(exception: unknown, host: ArgumentsHost): void {
         const { httpAdapter } = this.httpAdapterHost;
         const httpContext = host.switchToHttp();
         const request = httpContext.getRequest();
@@ -28,7 +24,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
                 ? exception.getResponse()
                 : null;
 
-                if (!(exception instanceof HttpException)) {
+        if (!(exception instanceof HttpException)) {
             this.logger.error(
                 'Unhandled exception',
                 exception instanceof Error

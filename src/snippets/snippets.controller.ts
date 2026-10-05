@@ -8,8 +8,10 @@ import {
     Query,
     Body,
     HttpCode,
-    HttpStatus
+    HttpStatus,
+    UseFilters,
 } from '@nestjs/common';
+import { AllExceptionsFilter } from 'src/common/filters/all-exceptions.filter';
 import { SnippetsService } from './snippets.service';
 import { CreateSnippetDto } from './dto/create-snippet.dto';
 import { UpdateSnippetDto } from './dto/update-snippet.dto';
@@ -17,6 +19,7 @@ import { QuerySnippetDto } from './dto/query-snippet.dto';
 import type { Snippet, FindSnippetsResult } from './snippet';
 
 @Controller('snippets')
+@UseFilters(AllExceptionsFilter)
 export class SnippetsController {
     constructor(private readonly snippetService: SnippetsService) { }
 
