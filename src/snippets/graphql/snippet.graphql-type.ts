@@ -8,7 +8,7 @@ import {
 import { LANGUAGES } from '../snippet';
 import type { Language } from '../snippet';
 
-const languageEnum = Object.fromEntries(
+export const languageEnum = Object.fromEntries(
     LANGUAGES.map((language) => [language, language])
 ) as Record<Language, Language>
 
