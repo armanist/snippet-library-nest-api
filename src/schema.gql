@@ -7,9 +7,16 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type PaginationMetadata {
+  limit: Int!
+  page: Int!
+  total: Int!
+  totalPages: Int!
+}
+
 type Query {
   snippet(id: ID!): Snippet!
-  snippets(search: String): [Snippet!]!
+  snippets(limit: Int, page: Int, search: String): SnippetPage!
 }
 
 type Snippet {
@@ -27,4 +34,9 @@ enum SnippetLanguage {
   javascript
   php
   typescript
+}
+
+type SnippetPage {
+  pagination: PaginationMetadata!
+  snippets: [Snippet!]!
 }
