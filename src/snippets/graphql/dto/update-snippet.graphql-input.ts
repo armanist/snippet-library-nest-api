@@ -1,7 +1,7 @@
 import { Field, InputType } from "@nestjs/graphql";
 import { IsArray, IsIn, IsOptional, IsString, MinLength } from "class-validator";
-import { LANGUAGES, type Language } from "../snippet";
-import { languageEnum } from "./snippet.graphql-type";
+import { LANGUAGES, type Language } from "src/snippets/contracts/snippet-language";
+import { languageEnum } from "../snippet-language.enum";
 
 @InputType('UpdateSnippetInput')
 export class UpdateSnippetGraphqlInput {

@@ -12,11 +12,12 @@ import {
     UseFilters,
 } from '@nestjs/common';
 import { AllExceptionsFilter } from 'src/common/filters/all-exceptions.filter';
-import { SnippetsService } from './snippets.service';
+import { SnippetsService } from '../snippets.service';
 import { CreateSnippetDto } from './dto/create-snippet.dto';
 import { UpdateSnippetDto } from './dto/update-snippet.dto';
 import { QuerySnippetDto } from './dto/query-snippet.dto';
-import type { Snippet, FindSnippetsResult } from './snippet';
+import type { Snippet } from '../contracts/snippet';
+import type { FindSnippetsResult } from '../contracts/find-snippet';
 
 @Controller('snippets')
 @UseFilters(AllExceptionsFilter)
@@ -25,11 +26,7 @@ export class SnippetsController {
 
     @Get()
     getAll(@Query() query: QuerySnippetDto): Promise<FindSnippetsResult> {
-        return this.snippetService.findAll({
-            search: query.search,
-            page: query.page,
-            limit: query.limit,
-        });
+        return this.snippetService.findAll(query);
     }
 
     @Get(':id')
@@ -43,7 +40,10 @@ export class SnippetsController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateSnippetDto: UpdateSnippetDto): Promise<Snippet> {
+    update(
+        @Param('id') id: string, 
+        @Body() updateSnippetDto: UpdateSnippetDto
+    ): Promise<Snippet> {
         return this.snippetService.update(id, updateSnippetDto);
     }
 

@@ -3,9 +3,9 @@ import { randomUUID } from 'crypto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SnippetEntity } from './snippet.entity';
 import { Repository } from 'typeorm';
-import type { CreateSnippetDto } from './dto/create-snippet.dto';
-import type { UpdateSnippetDto } from './dto/update-snippet.dto';
-import type { FindSnippetsOptions, FindSnippetsResult } from './snippet';
+import type { CreateSnippetData } from './contracts/create-snippet';
+import type { UpdateSnippetData } from './contracts/update-snippet';
+import type { FindSnippetsOptions, FindSnippetsResult } from './contracts/find-snippet';
 
 @Injectable()
 export class SnippetsService {
@@ -56,19 +56,19 @@ export class SnippetsService {
         return snippet;
     }
 
-    async create(createSnippetDto: CreateSnippetDto): Promise<SnippetEntity> {
+    async create(createSnippetData: CreateSnippetData): Promise<SnippetEntity> {
         const snippet = this.snippetRepository.create({
             id: randomUUID(),
-            ...createSnippetDto,
+            ...createSnippetData,
         });
 
         return this.snippetRepository.save(snippet);
     }
 
-    async update(id: string, updateSnippetDto: UpdateSnippetDto): Promise<SnippetEntity> {
+    async update(id: string, updateSnippetData: UpdateSnippetData): Promise<SnippetEntity> {
         const snippet = await this.findOne(id);
 
-        Object.assign(snippet, updateSnippetDto);
+        Object.assign(snippet, updateSnippetData);
 
         await this.snippetRepository.save(snippet);
 

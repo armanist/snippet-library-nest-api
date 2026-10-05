@@ -1,8 +1,9 @@
 import {Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
-import type { Language } from './snippet';
+import type { Snippet } from './contracts/snippet';
+import type { Language } from './contracts/snippet-language';
 
 @Entity('snippets')
-export class SnippetEntity {
+export class SnippetEntity implements Snippet {
     @PrimaryColumn('text')
     id!: string;
 

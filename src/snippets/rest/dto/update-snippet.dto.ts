@@ -1,5 +1,5 @@
 import { IsArray, IsIn, IsOptional, IsString, MinLength } from "class-validator";
-import { LANGUAGES, type Language } from "../snippet";
+import { LANGUAGES, type Language } from "src/snippets/contracts/snippet-language";
 
 export class UpdateSnippetDto {
     @IsOptional()

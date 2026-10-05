@@ -2,17 +2,11 @@ import {
     ID,
     ObjectType,
     Field,
-    GraphQLISODateTime,
-    registerEnumType
+    GraphQLISODateTime
 } from '@nestjs/graphql';
-import { LANGUAGES } from '../snippet';
-import type { Language } from '../snippet';
 
-export const languageEnum = Object.fromEntries(
-    LANGUAGES.map((language) => [language, language])
-) as Record<Language, Language>
-
-registerEnumType(languageEnum, {name: 'SnippetLanguage'})
+import { languageEnum } from './snippet-language.enum';
+import type { Language } from '../contracts/snippet-language';
 
 @ObjectType('Snippet')
 export class SnippetGraphqlType {
