@@ -9,6 +9,7 @@ scalar DateTime
 
 type Query {
   snippet(id: ID!): Snippet!
+  snippets: [Snippet!]!
 }
 
 type Snippet {
