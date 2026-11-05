@@ -1,4 +1,6 @@
 import { Args, ID, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { UseFilters } from "@nestjs/common";
+import { GraphqlExceptionsFilter } from "src/common/filters/graphql-exceptions.filter";
 import { SnippetsService } from "../snippets.service";
 import { SnippetGraphqlType } from "./snippet.graphql-type";
 import { SnippetPageGraphqlType } from "./snippet-page.graphql-type";
@@ -9,6 +11,7 @@ import type { Snippet } from "../contracts/snippet";
 import type { FindSnippetsResult } from "../contracts/find-snippet";
 
 @Resolver(() => SnippetGraphqlType)
+@UseFilters(GraphqlExceptionsFilter)
 export class SnippetResolver {
     constructor(private readonly snippetService: SnippetsService) { }
 

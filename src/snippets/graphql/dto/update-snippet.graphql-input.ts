@@ -1,5 +1,5 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsArray, IsIn, IsOptional, IsString, MinLength } from "class-validator";
+import { IsArray, IsIn, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
 import { LANGUAGES, type Language } from "src/snippets/contracts/snippet-language";
 import { languageEnum } from "../snippet-language.enum";
 
@@ -9,6 +9,7 @@ export class UpdateSnippetGraphqlInput {
     @IsOptional()
     @IsString()
     @MinLength(1)
+    @MaxLength(100)
     title?: string;
 
     @Field(() => languageEnum, { nullable: true })

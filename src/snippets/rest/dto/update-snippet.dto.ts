@@ -1,10 +1,11 @@
-import { IsArray, IsIn, IsOptional, IsString, MinLength } from "class-validator";
+import { IsArray, IsIn, IsOptional, IsString, MinLength, MaxLength } from "class-validator";
 import { LANGUAGES, type Language } from "src/snippets/contracts/snippet-language";
 
 export class UpdateSnippetDto {
     @IsOptional()
     @IsString()
     @MinLength(1)
+    @MaxLength(100)
     title?: string;
 
     @IsOptional()
